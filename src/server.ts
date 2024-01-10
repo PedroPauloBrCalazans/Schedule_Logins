@@ -1,12 +1,13 @@
 import fastify from "fastify";
 import { knex } from "./database";
+import crypto from "node:crypto";
 
 const app = fastify();
 
 app.get("/hello", async () => {
-  const table = await knex("sqlite_schema").select("*");
+  const login = await knex("logins").select("*");
 
-  return table;
+  return login;
 });
 
 app
