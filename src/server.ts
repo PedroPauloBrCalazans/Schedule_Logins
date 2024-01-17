@@ -1,14 +1,13 @@
 import fastify from "fastify";
-import { knex } from "./database";
+
 import crypto from "node:crypto";
 import { env } from "./env";
+import { loginRoutes } from "./routes/logins";
 
 const app = fastify();
 
-app.get("/hello", async () => {
-  const login = await knex("logins").select("*");
-
-  return login;
+app.register(loginRoutes, {
+  prefix: "logins",
 });
 
 app
