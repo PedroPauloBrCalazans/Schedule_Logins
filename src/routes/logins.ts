@@ -4,6 +4,12 @@ import { knex } from "../database";
 import { randomUUID } from "node:crypto";
 
 export async function loginRoutes(app: FastifyInstance) {
+  app.get("/", async () => {
+    const logins = await knex("logins").select();
+
+    return { logins };
+  });
+
   app.post("/", async (request, response) => {
     const createLoginBodySchema = z.object({
       title: z.string(),
